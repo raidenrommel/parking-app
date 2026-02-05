@@ -1,0 +1,106 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0b0f14;
+  font-family: system-ui, sans-serif;
+  color: #111;
+}
+
+/* ===== TOP BAR (LOGO) ===== */
+.topbar {
+  background: #000;
+  padding: 24px;       /* was 50px */
+  display: flex;
+  justify-content: center;
+}
+
+
+.topbar img {
+  height: 500px;        /* was 500px */
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+
+/* ===== MAIN APP ===== */
+.app {
+  background: #f5f7fa;
+  max-width: 1100px;
+  margin: -120px auto 30px; /* PULL CONTENT UP */
+  padding: 24px;
+  border-radius: 18px;
+}
+
+
+/* ===== CONTROLS ===== */
+.branch-toggle {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  background: #6bcf3a;
+  color: #fff;
+}
+
+button.active {
+  background: #0f2a44;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 16px;
+  border-radius: 14px;
+  cursor: pointer;
+  border-left: 6px solid #6bcf3a;
+}
+
+.card span {
+  display: block;
+  font-size: 13px;
+  color: #555;
+}
+
+/* ===== BOOKING ===== */
+.booking {
+  margin-top: 32px;
+  padding: 20px;
+  border-radius: 16px;
+  background: #ffffff;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.msg {
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+
+
+
+
+
