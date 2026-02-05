@@ -1,5 +1,5 @@
-const API_BASE =
-  "https://3508emwh93.execute-api.ap-southeast-1.amazonaws.com";
+const API = import.meta.env.VITE_API_URL;
+
 
 export async function getSlots(branch) {
   const res = await fetch(`${API_BASE}/slots?branch=${branch}`);
