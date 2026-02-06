@@ -14,13 +14,25 @@ jobs:
         working-directory: infra
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.6.6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # 🔑 BUILD LAMBDA ZIP (this fixes your error)
+      - name: Build Lambda package
+        run: |
+          cd ../backend
+          npm ci
+          zip -r lambda.zip index.js slots.js utils.js package.json package-lock.json node_modules
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -37,3 +49,4 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
+
