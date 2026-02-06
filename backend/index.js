@@ -1,12 +1,27 @@
+// ======================================================
+// SECTION: Imports
+// ======================================================
 const { getSlots, paySlot, resetAll } = require("./slots");
 
+// ======================================================
+// SECTION: Lambda Entry Point
+// ======================================================
 exports.handler = async (event) => {
+
+  // ===== MARKER: CI/CD BACKEND UPDATE =====
+  console.log("🚀 BACKEND UPDATED VIA GITHUB ACTIONS");
+  console.log("DEPLOY_TIMESTAMP:", new Date().toISOString());
+  // =======================================
+
   console.log("EVENT:", JSON.stringify(event));
   console.log("TABLE_NAME:", process.env.TABLE_NAME);
 
   const method = event.requestContext?.http?.method;
   const path = event.rawPath;
 
+  // ======================================================
+  // SECTION: CORS Preflight Handling
+  // ======================================================
   if (method === "OPTIONS") {
     return {
       statusCode: 204,
@@ -16,6 +31,10 @@ exports.handler = async (event) => {
   }
 
   try {
+
+    // ======================================================
+    // SECTION: GET /slots
+    // ======================================================
     if (method === "GET" && path === "/slots") {
       const branch = event.queryStringParameters?.branch;
       if (!branch) {
@@ -34,6 +53,9 @@ exports.handler = async (event) => {
       };
     }
 
+    // ======================================================
+    // SECTION: POST /slots/pay
+    // ======================================================
     if (method === "POST" && path === "/slots/pay") {
       const body = event.body ? JSON.parse(event.body) : {};
       const result = await paySlot(body);
@@ -44,6 +66,9 @@ exports.handler = async (event) => {
       };
     }
 
+    // ======================================================
+    // SECTION: POST /reset
+    // ======================================================
     if (method === "POST" && path === "/reset") {
       const result = await resetAll();
       return {
@@ -53,6 +78,9 @@ exports.handler = async (event) => {
       };
     }
 
+    // ======================================================
+    // SECTION: 404 Handler
+    // ======================================================
     return {
       statusCode: 404,
       headers: corsHeaders(),
@@ -60,6 +88,10 @@ exports.handler = async (event) => {
     };
 
   } catch (err) {
+
+    // ======================================================
+    // SECTION: Error Handling
+    // ======================================================
     console.error("LAMBDA ERROR:", err);
     return {
       statusCode: 500,
@@ -69,6 +101,9 @@ exports.handler = async (event) => {
   }
 };
 
+// ======================================================
+// SECTION: CORS Headers Helper
+// ======================================================
 function corsHeaders() {
   return {
     "Access-Control-Allow-Origin": "*",
@@ -77,3 +112,4 @@ function corsHeaders() {
     "Content-Type": "application/json"
   };
 }
+
