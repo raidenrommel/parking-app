@@ -17,7 +17,7 @@ resource "aws_lambda_function" "api" {
       # ===============================
       # ADMIN SECURITY (RESET PROTECTION)
       # ===============================
-      ADMIN_KEY  = var.admin_key
+      ADMIN_KEY = var.admin_key
     }
   }
 
