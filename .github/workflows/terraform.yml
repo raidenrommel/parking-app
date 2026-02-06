@@ -40,6 +40,12 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
 
+    # ===============================
+    # TERRAFORM → LAMBDA ADMIN SECRET
+    # ===============================
+      TF_VAR_admin_key: ${{ secrets.ADMIN_KEY }}
+
+
     steps:
       # ===================================================
       # 1. CHECKOUT SOURCE CODE
