@@ -1,26 +1,20 @@
 name: Reset Parking Demo Data
 
-# =========================
-# MANUAL TRIGGER ONLY
-# =========================
 on:
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   reset:
     runs-on: ubuntu-latest
 
-    # =========================
-    # ENVIRONMENT VARIABLES
-    # =========================
     env:
       API_URL: https://icgav798z6.execute-api.ap-southeast-1.amazonaws.com
+      ADMIN_KEY: ${{ secrets.ADMIN_KEY }}
 
     steps:
-      # =========================
-      # STEP 1 — Call /reset API
-      # =========================
       - name: Reset DynamoDB demo data
         run: |
-          echo "Calling reset endpoint..."
-          curl -X POST "$API_URL/reset"
+          echo "Calling protected reset endpoint..."
+          curl -f -X POST "$API_URL/reset" \
+            -H "x-admin-key: $ADMIN_KEY"
+
